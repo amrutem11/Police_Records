@@ -3,13 +3,16 @@ package com.Main;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
+import com.Exceptions.AdminException;
+import com.Exceptions.CrimeException;
+import com.Exceptions.CriminalException;
 import com.Usecases.AdminUsecase;
 import com.Usecases.CrimeUsecase;
 import com.Usecases.CriminalsUsecase;
 
 public class UserActivity {
 	
-	public static void selectUser() {
+	public static void selectUser() throws CrimeException, CriminalException {
 		
 
 		Scanner scan = new Scanner(System.in);		
@@ -55,10 +58,12 @@ public class UserActivity {
 		
 	}
 
-	public static void adminOptions() {
+	public static void adminOptions() throws CrimeException, AdminException, CriminalException {
 		
 		System.out.println("\nChoose an options - ");
-		System.out.println("1. Crime Records (Create,Update,View)\r\n" + "2. Criminals (Create,Update,View)\r\n"+ "3. Exit (Admin Logout)");
+		System.out.println();
+		System.out.println("1. Crime Records (Create,Update,View)\r\n" + "2. Criminal's Record (Create,Update,View)\r\n"
+		+ "3. Exit (Admin Logout)");
 
 		System.out.println("\nEnter any number from above");
 
@@ -93,15 +98,19 @@ public class UserActivity {
 	}
 }
 
-	@SuppressWarnings({  "resource", "unused" })
+	@SuppressWarnings({  "resource" })
 	
 	
-	public static void criminalsOptions() {
-		System.out.println("\nAdd,Delete, View Crime");
+	public static void criminalsOptions() throws CrimeException, AdminException, CriminalException {
+		
+		System.out.println("----------------------------------");
+		
+		System.out.println("\nAdd,Delete, View Criminal");
+		
 		System.out.println("----------------------------------");
 
-		System.out.println("\nChoose an options - \r\n" + "1. Add New Criminal\r\n"
-				+ "3. View All Criminals\r\n" + "4. Delete Criminal by Name\r\n" + "5. Exit (Get Admin Options)");
+		System.out.println("\nChoose an options - \r\n" + "1. Add New Criminal\r\n"+"2. Search Criminal by Name\r\n"
+				+ "3. View All Criminals\r\n" + "4. View All Criminals AreaWise\r\n" + "5. Delete Criminal by Name\r\n" + "6. Exit (Get Admin Options)");
 
 		Scanner scan = new Scanner(System.in);
 
@@ -127,16 +136,22 @@ public class UserActivity {
 			CriminalsUsecase.addNewCriminal();
 			break;
 			
-	
 		case 2 :
-			CriminalsUsecase.viewAllCriminals();
+			CriminalsUsecase.searchCriminalbyName();
 			break;
 			
 		case 3 :
-			CriminalsUsecase.deleteCriminalRecord();
+			CriminalsUsecase.viewAllCriminals();
 			break;
 			
 		case 4 :
+			CriminalsUsecase.viewAllCriminalsAreaWise();
+			
+		case 5 :
+			CriminalsUsecase.deleteCriminalRecord();
+			break;
+			
+		case 6 :
 			UserActivity.adminOptions();
 			break;
 			
@@ -147,20 +162,24 @@ public class UserActivity {
 
 			System.out.println("Try again...");
 			
-			UserActivity.criminalsOptions();
+			UserActivity.adminOptions();
 		}
 		
 	}
 
-	@SuppressWarnings({ "unused", "resource" })
+	@SuppressWarnings({ "resource" })
 	
-	private static void crimeOptions() {
+	
+	public static void crimeOptions() throws CrimeException, CrimeException, AdminException, CriminalException {
+		
+		System.out.println("----------------------------------");
 		
 		System.out.println("\nAdd, Update, View Crime Record");
+		
 		System.out.println("----------------------------------");
 
-		System.out.println("\nChoose an options - \r\n" + "1. Add New Crime \r\n" + "2. Update Crime Status\r\n"
-				+ "3. View All Crime Records\r\n" + "4. Exit (Get Admin Options)");
+		System.out.println("\nChoose an options - \r\n" + "1. Add New Crime \r\n" + "2. Update Crime Status\r\n"+ "3. Search Crime based on Id\r\n"
+				+ "4. View All Crime Records\r\n" + "5. View All Crimes AreaWise\r\n" + "6. Exit (Get Admin Options)");
 
 		Scanner scan = new Scanner(System.in);
 
@@ -187,16 +206,22 @@ public class UserActivity {
 			break;
 			
 		case 2 :
-			CrimeUsecase.updateStaus();
+			CrimeUsecase.updateStatus();
 			break;
 			
 		case 3 :
+			CrimeUsecase.searchCrimeBasedOnId();
+			break;
+			
+		case 4 :
 			CrimeUsecase.viewAllCrimes();
 			break;
 			
-		
+		case 5 :
+			CrimeUsecase.areaWiseCrime();
+			break;
 			
-		case 4 :
+		case 6 :
 			UserActivity.adminOptions();
 			break;
 			
@@ -207,7 +232,7 @@ public class UserActivity {
 
 			System.out.println("Try again...");
 			
-			UserActivity.criminalsOptions();
+			UserActivity.adminOptions();
 		}
 	}
 }

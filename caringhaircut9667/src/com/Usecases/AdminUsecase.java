@@ -5,13 +5,15 @@ import java.util.Scanner;
 import com.Dao.AdminDao;
 import com.Dao.AdminDaoImpl;
 import com.Exceptions.AdminException;
+import com.Exceptions.CrimeException;
+import com.Exceptions.CriminalException;
 import com.Main.UserActivity;
 import com.Model.Admin;
 
 public class AdminUsecase {
 
 	
-	public static void adminLogin() {
+	public static void adminLogin() throws CrimeException, CriminalException {
 		
 		Scanner scan = new Scanner(System.in);
 
@@ -47,7 +49,7 @@ public class AdminUsecase {
 	
 	
 	
-public static void adminLogout() {
+public static void adminLogout() throws CrimeException, AdminException, CriminalException {
 		
 		System.out.println("Are you sure? y/n");
 		

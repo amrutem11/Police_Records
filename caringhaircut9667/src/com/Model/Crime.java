@@ -9,22 +9,39 @@ public class Crime {
 	private String date;
 	private String Place;
 	private String Description;
+	private String Victims; 
 	private String Suspects;
+	private String DetailDescription;
+	
 	private String Status;
 	
 	public Crime() {
 		super();
 	}
-	public Crime(int CrimeId,String date, String place, String description, String suspects, String status) {
+	public Crime(int CrimeId,String date, String place, String description,String Victims, String suspects,String DetailDescription, String status) {
 		super();
 		this.CrimeId = CrimeId;
 		this.date = date;
-		Place = place;
-		Description = description;
-		Suspects = suspects;
-		Status = status;
+		this.Place = place;
+		this.Description = description;
+		this.Victims = Victims;
+		this.Suspects = suspects;
+		this.DetailDescription = DetailDescription;
+		this.Status = status;
 	}
 	
+	public String getVictims() {
+		return Victims;
+	}
+	public void setVictims(String victims) {
+		Victims = victims;
+	}
+	public String getDetailDescription() {
+		return DetailDescription;
+	}
+	public void setDetailDescription(String detailDescription) {
+		DetailDescription = detailDescription;
+	}
 	public int getCrimeId() {
 		return CrimeId;
 	}
@@ -64,9 +81,11 @@ public class Crime {
 	}
 	@Override
 	public String toString() {
-		return "Crime [date=" + date + ", Place=" + Place + ", Description=" + Description + ", Suspects=" + Suspects
+		return "Crime [CrimeId=" + CrimeId + ", date=" + date + ", Place=" + Place + ", Description=" + Description
+				+ ", Victims=" + Victims + ", Suspects=" + Suspects + ", DetailDescription=" + DetailDescription
 				+ ", Status=" + Status + "]";
 	}
+	
 	
 	
 	

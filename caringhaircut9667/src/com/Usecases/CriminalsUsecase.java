@@ -3,16 +3,22 @@ package com.Usecases;
 import java.util.List;
 import java.util.Scanner;
 
+import com.Dao.CrimeDao;
+import com.Dao.CrimeDaoImpl;
 import com.Dao.CriminalsDao;
 import com.Dao.CriminalsDaoImpl;
+import com.Exceptions.AdminException;
+import com.Exceptions.CrimeException;
 import com.Exceptions.CriminalException;
 import com.Main.UserActivity;
+import com.Model.Crime;
 import com.Model.Criminal;
 
 public class CriminalsUsecase {
 
-		
-	public static void addNewCriminal() {
+		//to add new criminal;
+	
+	public static void addNewCriminal() throws CrimeException, AdminException, CriminalException {
 		
 		CriminalsDao dao = new CriminalsDaoImpl();
 		
@@ -56,6 +62,8 @@ public class CriminalsUsecase {
 			String result = dao.addNewCriminal(criminal);
 			
 			System.out.println(result);
+			
+			UserActivity.criminalsOptions();
 		
 		} 
 		catch (Exception e) {
@@ -68,7 +76,40 @@ public class CriminalsUsecase {
 		
 	}
 	
-	public static void viewAllCriminals() {
+	
+	//to search criminal by name;
+	
+	public static void searchCriminalbyName () {
+		
+		Scanner scan = new Scanner (System.in);
+		
+		System.out.println("Enter name to search ");
+		String name = scan.next();
+		
+		CriminalsDao dao = new CriminalsDaoImpl();
+		
+		Criminal criminal = dao.searchcriminalByName(name);
+		
+		if(criminal != null) {
+			
+			System.out.println("Criminal's Name is : - " + criminal.getName());
+			System.out.println("Criminal's age is : - " + criminal.getAge());
+			System.out.println("Criminal's gender is : - " + criminal.getGender());
+			System.out.println("Criminal's address is : - " + criminal.getAddress());
+			System.out.println("Criminal's identifying mark is : - " + criminal.getIdentifyingMark());
+			System.out.println("Criminal's area of arrest is : - " + criminal.getAreaOfArrest());
+			System.out.println("Criminal's attatched crime  is : - " + criminal.getAttatchedCrime());
+			
+		}
+		else {
+			System.out.println("Sorry ! Criminal details Not Found...");
+		}
+	}
+	
+	
+	//to view all criminal records
+	
+	public static void viewAllCriminals() throws CrimeException, AdminException, CriminalException {
 		
 		CriminalsDao dao = new CriminalsDaoImpl();
 		
@@ -101,6 +142,9 @@ public class CriminalsUsecase {
 		UserActivity.criminalsOptions();
 	}
 	
+	
+	//to delete criminal record;
+	
 	public static void deleteCriminalRecord() {
 		
 		@SuppressWarnings("resource")
@@ -129,6 +173,36 @@ public class CriminalsUsecase {
 		
 		
 		
+	}
+
+
+	public static void viewAllCriminalsAreaWise() throws CriminalException, AdminException, CrimeException {
+		
+		Scanner scan = new Scanner(System.in);
+		
+		System.out.println("Enter area to search for criminals");
+		String area = scan.next();
+		
+		CriminalsDao dao = new CriminalsDaoImpl();
+		
+		List<Criminal> criminals = dao.getCriminalsAreaWise(area);
+		
+		criminals.forEach(c -> {
+
+			System.out.println("Criminal Name : " + c.getName());
+			System.out.println("crimanal age   : " + c.getAge());
+			System.out.println("Criminal  gender  : " + c.getGender());
+			System.out.println("Criminal address : " + c.getAddress());
+			System.out.println("Criminal Identyfying mark : " + c.getIdentifyingMark());
+			System.out.println("Criminal area of arrest  : " + c.getAreaOfArrest());
+			System.out.println("Criminal attatched crime  : " + c.getAttatchedCrime());
+			
+			
+
+			System.out.println("==================================");
+		});
+
+		UserActivity.criminalsOptions();
 	}
 
 	

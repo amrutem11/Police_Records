@@ -5,6 +5,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import com.Exceptions.AdminException;
+import com.Exceptions.CrimeException;
+import com.Exceptions.CriminalException;
 import com.Main.UserActivity;
 import com.Model.Admin;
 import com.Util.DBUtil;
@@ -47,9 +49,14 @@ public class AdminDaoImpl implements AdminDao{
 	}
 
 	@Override
-	public void logoutAdmin() throws AdminException {
+	public void logoutAdmin() throws AdminException, CriminalException {
 		
-		UserActivity.selectUser();
+		try {
+			UserActivity.selectUser();
+		} catch (CrimeException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 	}
 

@@ -6,13 +6,15 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-
 import com.Exceptions.CriminalException;
 import com.Model.Criminal;
 import com.Util.DBUtil;
 
-public class CriminalsDaoImpl implements CriminalsDao{
 
+public  class CriminalsDaoImpl implements CriminalsDao{
+
+	// to add new criminal;
+	
 	@Override
 	public String addNewCriminal(Criminal criminal) throws Exception {
 		
@@ -43,6 +45,8 @@ public class CriminalsDaoImpl implements CriminalsDao{
 		return message;
 	}
 
+	// to view all criminals;
+	
 	public List<Criminal> viewAllCriminals() throws CriminalException {
 		
 		List<Criminal> criminals = new ArrayList<Criminal>();
@@ -90,6 +94,10 @@ public class CriminalsDaoImpl implements CriminalsDao{
 		return criminals;
 	}
 
+	
+	
+	// to delete criminals by name;
+	
 	@Override
 	public String deleteCriminalByName(Criminal criminal) throws CriminalException {
 		
@@ -114,9 +122,108 @@ public class CriminalsDaoImpl implements CriminalsDao{
 		return message;
 	}
 
+	// to search criminal by name;
 	
-	
+	@Override
+	public Criminal searchcriminalByName(String Name) {
+			
+		Criminal criminal = null;
+		
+		try (Connection conn = DBUtil.provideConnection()){
+			
+		PreparedStatement  ps =	conn.prepareStatement("select * from criminals where Name = ?");
+		
+		ps.setString(1, Name);
+		
+		ResultSet rs = ps.executeQuery();
+		
+		if(rs.next()) {
+			
+			String n = rs.getString("Name");
+			int a = rs.getInt("Age");
+			String g = rs.getString("Gender");
+			String ad = rs.getString("Address");
+			String im = rs.getString("IdentifyingMark");
+			String aa = rs.getString("AreaOfArrest");
+			String ac = rs.getString("attatchedCrime");
+			
+			 criminal = new Criminal();
+			 
+			 criminal.setName(n);
+			 criminal.setAge(a);
+			 criminal.setGender(g);
+			 criminal.setAddress(ad);
+			 criminal.setIdentifyingMark(im);
+			 criminal.setAreaOfArrest(aa);
+			 criminal.setAttatchedCrime(ac);
+			
+		}
 
-	
+		
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+		}
+		
+		
+		return criminal;
+	}
+
+	@Override
+	public List<Criminal> getCriminalsAreaWise(String area) {
+		
+		List<Criminal> criminals = new ArrayList<>();
+		
+		
+		try(Connection conn = DBUtil.provideConnection()){
+			
+			PreparedStatement ps = conn.prepareStatement("select * from criminals where address = ?");
+			
+			ps.setString(1,area);
+			
+			
+			ResultSet rs = ps.executeQuery();
+			
+			while(rs.next()) {
+				
+				String n = rs.getString("Name");				
+				int a = rs.getInt("Age");
+				String g = rs.getString("gender");
+				String ad = rs.getString("address");
+				String im = rs.getString("IdentifyingMark");
+				String aa = rs.getString("AreaOfArrest");
+				String ac = rs.getString("AttatchedCrime");
+				
+				
+			
+				Criminal criminal = new Criminal();
+				
+				criminal.setName(n);
+				criminal.setAge(a);
+				criminal.setGender(g);
+				criminal.setAddress(ad);
+				criminal.setIdentifyingMark(im);
+				criminal.setAreaOfArrest(aa);
+				criminal.setAttatchedCrime(ac);
+				
+				criminals.add(criminal);
+			}
+			
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+		}
+		
+		
+		return criminals;
+		
+	}
 
 }
+
+	
+
+	
+	
+
+	
+
+
