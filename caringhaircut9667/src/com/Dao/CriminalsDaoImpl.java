@@ -25,20 +25,29 @@ public  class CriminalsDaoImpl implements CriminalsDao{
 			PreparedStatement  ps = conn.prepareStatement("insert into criminals values (?,?,?,?,?,?,?)");
 			
 			ps.setString(1, criminal.getName());
+			
 			ps.setInt(2, criminal.getAge());
+			
 			ps.setString(3, criminal.getGender());
+			
 			ps.setString(4, criminal.getAddress());
+			
 			ps.setString(5, criminal.getIdentifyingMark());
+			
 			ps.setString(6, criminal.getAreaOfArrest());
+			
 			ps.setString(7, criminal.getAttatchedCrime());
 			
 			
 			int x = ps.executeUpdate();
 			
 			if(x > 0) {
+				
 				message = "Criminal details added Successfully...!";
 			}
+			
 		} catch (SQLException e) {
+			
 			throw new CriminalException(e.getMessage());
 		}
 		
@@ -60,21 +69,33 @@ public  class CriminalsDaoImpl implements CriminalsDao{
 			while(rs.next()) {
 				
 				String n = rs.getString("name");
+				
 				int a = rs.getInt("age");
+				
 				String g = rs.getString("gender");
+				
 				String ad = rs.getString("address");
+				
 				String im = rs.getString("identifyingMark");
+				
 				String aa = rs.getString("areaOfArrest");
+				
 				String ac = rs.getString("AttatchedCrime");
 				
 				Criminal criminal = new Criminal();
 				
 				criminal.setName(n);
+				
 				criminal.setAge(a);
+				
 				criminal.setGender(g);
+				
 				criminal.setAddress(ad);
+				
 				criminal.setIdentifyingMark(im);
+				
 				criminal.setAreaOfArrest(aa);
+				
 				criminal.setAttatchedCrime(ac);
 				
 				criminals.add(criminal);
@@ -84,6 +105,7 @@ public  class CriminalsDaoImpl implements CriminalsDao{
 			
 			
 		} catch (SQLException e) {
+			
 			throw new CriminalException(e.getMessage());
 		}
 		
@@ -140,21 +162,33 @@ public  class CriminalsDaoImpl implements CriminalsDao{
 		if(rs.next()) {
 			
 			String n = rs.getString("Name");
+			
 			int a = rs.getInt("Age");
+			
 			String g = rs.getString("Gender");
+			
 			String ad = rs.getString("Address");
+			
 			String im = rs.getString("IdentifyingMark");
+			
 			String aa = rs.getString("AreaOfArrest");
-			String ac = rs.getString("attatchedCrime");
+			
+			String ac = rs.getString("AttatchedCrime");
 			
 			 criminal = new Criminal();
 			 
 			 criminal.setName(n);
+			 
 			 criminal.setAge(a);
+			 
 			 criminal.setGender(g);
+			 
 			 criminal.setAddress(ad);
+			 
 			 criminal.setIdentifyingMark(im);
+			 
 			 criminal.setAreaOfArrest(aa);
+			 
 			 criminal.setAttatchedCrime(ac);
 			
 		}
@@ -167,7 +201,9 @@ public  class CriminalsDaoImpl implements CriminalsDao{
 		
 		return criminal;
 	}
-
+	
+	// To get criminals areawise;
+	
 	@Override
 	public List<Criminal> getCriminalsAreaWise(String area) {
 		
@@ -176,7 +212,7 @@ public  class CriminalsDaoImpl implements CriminalsDao{
 		
 		try(Connection conn = DBUtil.provideConnection()){
 			
-			PreparedStatement ps = conn.prepareStatement("select * from criminals where address = ?");
+			PreparedStatement ps = conn.prepareStatement("select * from criminals where address = ? ");
 			
 			ps.setString(1,area);
 			
@@ -185,12 +221,18 @@ public  class CriminalsDaoImpl implements CriminalsDao{
 			
 			while(rs.next()) {
 				
-				String n = rs.getString("Name");				
+				String n = rs.getString("Name");	
+				
 				int a = rs.getInt("Age");
+				
 				String g = rs.getString("gender");
+				
 				String ad = rs.getString("address");
+				
 				String im = rs.getString("IdentifyingMark");
+				
 				String aa = rs.getString("AreaOfArrest");
+				
 				String ac = rs.getString("AttatchedCrime");
 				
 				
@@ -198,21 +240,27 @@ public  class CriminalsDaoImpl implements CriminalsDao{
 				Criminal criminal = new Criminal();
 				
 				criminal.setName(n);
+				
 				criminal.setAge(a);
+				
 				criminal.setGender(g);
+				
 				criminal.setAddress(ad);
+				
 				criminal.setIdentifyingMark(im);
+				
 				criminal.setAreaOfArrest(aa);
+				
 				criminal.setAttatchedCrime(ac);
 				
 				criminals.add(criminal);
 			}
 			
 		} catch (SQLException e) {
+			
 			System.out.println(e.getMessage());
 		}
-		
-		
+			
 		return criminals;
 		
 	}

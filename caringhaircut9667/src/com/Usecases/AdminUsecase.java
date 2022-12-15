@@ -17,7 +17,7 @@ public class AdminUsecase {
 		
 		Scanner scan = new Scanner(System.in);
 
-		System.out.println("\nEnter admin details -");
+		System.out.println("\nEnter admin Credentials to login -");
 		
 		System.out.println("-----------------------------------");
 		
@@ -26,6 +26,7 @@ public class AdminUsecase {
 		String username = scan.next();
 
 		System.out.println("Enter Password : ");
+		
 		String password = scan.next();	
 		
 		
@@ -35,14 +36,17 @@ public class AdminUsecase {
 			Admin admin = dao.loginAdmin(username, password);
 			
 			
-			System.out.println("\nWelcome! Login Successful..."+admin.getUsername());
+			System.out.println("\nWelcome! Login Successful..." + admin.getUsername());
+			
 			UserActivity.adminOptions();
 			
 
 		} catch (AdminException e) {
+			
 			System.out.println(e.getMessage());			
 			
 			System.out.println("\nTry again...");
+			
 			UserActivity.selectUser();
 		}
 	}
@@ -62,7 +66,8 @@ public static void adminLogout() throws CrimeException, AdminException, Criminal
 			try {
 				new AdminDaoImpl().logoutAdmin();
 			}
-			catch (AdminException e) {				
+			catch (AdminException e) {		
+				
 				System.out.println(e.getMessage());
 			}
 			
@@ -70,6 +75,7 @@ public static void adminLogout() throws CrimeException, AdminException, Criminal
 		else {
 			
 			System.out.println("\nTry again...");
+			
 			System.out.println();
 			
 			UserActivity.adminOptions();

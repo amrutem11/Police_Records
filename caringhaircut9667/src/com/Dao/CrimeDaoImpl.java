@@ -128,6 +128,9 @@ public class CrimeDaoImpl implements CrimeDao {
 	}
 
 
+	
+	//to view all crime records;
+	
 	@Override
 	public List<Crime> viewAllCrimes() throws CrimeException {
 		
@@ -179,6 +182,7 @@ public class CrimeDaoImpl implements CrimeDao {
 		return crimes;
 	}
 
+	// to view all crimes areaWise
 	
 	@Override
 	public List<Crime> getCrimeAreaWise(String place) {
@@ -233,4 +237,125 @@ public class CrimeDaoImpl implements CrimeDao {
 	}
 
 	
+	
+	// To show the number of solved and notsolved crime;
+	
+	
+	@Override
+	public List<Crime> crimeStats(String status) {
+		
+		List<Crime> crimes = new ArrayList<>();
+		
+		
+		try(Connection conn = DBUtil.provideConnection()){
+			
+			PreparedStatement ps = conn.prepareStatement("select * from crime where Status = ?");
+			
+			ps.setString(1,status);
+			
+			
+			ResultSet rs = ps.executeQuery();
+			
+			while(rs.next()) {
+				
+				int ci = rs.getInt("CrimeId");				
+				String d = rs.getString("date");
+				String p = rs.getString("Place");
+				String ds = rs.getString("Description");
+				String v = rs.getString("Victims");
+				String dd = rs.getString("DetailDescription");
+				String s = rs.getString("suspects");
+				String st = rs.getString("Status");
+				
+			
+				Crime crime = new Crime();
+				
+				crime.setCrimeId(ci);
+				crime.setDate(d);
+				crime.setPlace(p);
+				crime.setDescription(ds);
+				crime.setVictims(v);
+				crime.setDetailDescription(dd);
+				crime.setSuspects(s);
+				crime.setStatus(st);
+				
+				
+				crimes.add(crime);
+			}
+			
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+		}
+		
+		int count = crimes.size();
+		
+		System.out.println("Number of "+ status +  " crime is : " + count);
+		
+		return crimes;
+		
+		
+	}
+
+	
+	////to show the number of crimes recorded in current month;
+	
+	@Override
+	public List<Crime> crimeRecordedInCurrentMonth() {
+		
+		
+		List<Crime> crimes = new ArrayList<>();
+		
+		
+		try(Connection conn = DBUtil.provideConnection()){
+			
+			PreparedStatement ps = conn.prepareStatement("select * from crime where Month(Date) = Month(SYSDATE())");
+			
+		
+			
+			
+			ResultSet rs = ps.executeQuery();
+			
+			while(rs.next()) {
+				
+				int ci = rs.getInt("CrimeId");				
+				String d = rs.getString("date");
+				String p = rs.getString("Place");
+				String ds = rs.getString("Description");
+				String v = rs.getString("Victims");
+				String dd = rs.getString("DetailDescription");
+				String s = rs.getString("suspects");
+				String st = rs.getString("Status");
+				
+			
+				Crime crime = new Crime();
+				
+				crime.setCrimeId(ci);
+				crime.setDate(d);
+				crime.setPlace(p);
+				crime.setDescription(ds);
+				crime.setVictims(v);
+				crime.setDetailDescription(dd);
+				crime.setSuspects(s);
+				crime.setStatus(st);
+				
+				
+				crimes.add(crime);
+			}
+			
+		} catch (SQLException e) {
+			
+			System.out.println(e.getMessage());
+		}
+		
+		int count = crimes.size();
+		
+		System.out.println("Number of crime recorded in current month is : " + count);
+		
+		return crimes;
+	}
+
+
+	
 }
+
+	

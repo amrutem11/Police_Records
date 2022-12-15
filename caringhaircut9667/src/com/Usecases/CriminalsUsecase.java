@@ -79,7 +79,7 @@ public class CriminalsUsecase {
 	
 	//to search criminal by name;
 	
-	public static void searchCriminalbyName () {
+	public static void searchCriminalbyName () throws CrimeException, AdminException, CriminalException {
 		
 		Scanner scan = new Scanner (System.in);
 		
@@ -104,6 +104,8 @@ public class CriminalsUsecase {
 		else {
 			System.out.println("Sorry ! Criminal details Not Found...");
 		}
+		
+		UserActivity.criminalsOptions();
 	}
 	
 	
@@ -145,7 +147,7 @@ public class CriminalsUsecase {
 	
 	//to delete criminal record;
 	
-	public static void deleteCriminalRecord() {
+	public static void deleteCriminalRecord() throws CrimeException, AdminException, CriminalException {
 		
 		@SuppressWarnings("resource")
 		Scanner scan = new Scanner(System.in);
@@ -171,7 +173,7 @@ public class CriminalsUsecase {
 		}
 		
 		
-		
+		UserActivity.criminalsOptions();
 		
 	}
 

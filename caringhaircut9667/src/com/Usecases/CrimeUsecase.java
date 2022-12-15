@@ -17,8 +17,7 @@ import com.Model.Criminal;
 public class CrimeUsecase {
 
 	
-	// to add a new crime record;
-	
+	// to add a new crime record;	
 	
 	public static void addNewCrime() throws AdminException, CrimeException, CriminalException {
 		
@@ -55,12 +54,19 @@ public class CrimeUsecase {
 		String status = scan.next();
 		
 		crime.setCrimeId(CrimeId);
+		
 		crime.setDate(date);
+		
 		crime.setPlace(place);
+		
 		crime.setDescription(description);
+		
 		crime.setVictims(Victims);
+		
 		crime.setDetailDescription(DetailDescription);
+		
 		crime.setSuspects(suspects);
+		
 		crime.setStatus(status);
 		
 		
@@ -70,7 +76,8 @@ public class CrimeUsecase {
 			String result = dao.addNewCrime(crime);
 			
 			System.out.println(result);
-		
+			
+			UserActivity.crimeOptions();
 		} 
 		catch (Exception e) {
 			System.out.println(e.getMessage());
@@ -85,7 +92,7 @@ public class CrimeUsecase {
 	
 	// to update status of a crime
 	
-	public static void updateStatus() {
+	public static void updateStatus() throws CrimeException, AdminException, CriminalException {
 		
 		Scanner scan = new Scanner(System.in);
 		
@@ -106,7 +113,7 @@ public class CrimeUsecase {
 		
 		System.out.println(result);
 		
-		
+		UserActivity.crimeOptions();
 	}
 	
 	
@@ -170,6 +177,9 @@ public class CrimeUsecase {
 		
 	}
 	
+	
+	// to view all crimes areaWise
+	
 	public static void areaWiseCrime() throws CrimeException, AdminException, CriminalException {
 		
 		Scanner scan = new Scanner(System.in);
@@ -200,4 +210,42 @@ public class CrimeUsecase {
 		
 		
 	}
+	
+	
+	// To show the number of solved and notsolved crime;
+	
+	public static void crimeStatistics() throws CrimeException, AdminException, CriminalException {
+		
+		Scanner scan = new Scanner(System.in);
+		
+		System.out.println("Enter status");
+		
+		String status = scan.next();
+		
+		CrimeDao dao = new CrimeDaoImpl();
+		
+		List<Crime> crimes = dao.crimeStats(status);
+		
+
+		
+		
+		UserActivity.crimeOptions();
+	}
+	
+	
+	
+	// to show the number of crimes recorded in current month;
+	
+	
+	public static void crimeRecordedInCurrentMonth() throws CrimeException, AdminException, CriminalException {
+		
+		
+		
+		CrimeDao dao = new CrimeDaoImpl();
+		
+		List<Crime> crimes = dao.crimeRecordedInCurrentMonth();
+		
+		UserActivity.crimeOptions();
+	}
+	
 }

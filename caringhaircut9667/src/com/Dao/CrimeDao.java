@@ -30,5 +30,13 @@ public interface CrimeDao {
 	
 	public List<Crime> getCrimeAreaWise(String place);
 	
+	// To show the number of solved and notsolved crime;
+	
+	public List<Crime> crimeStats(String status);
+	
+	//to show the number of crimes recorded in current month;
+	
+	public List<Crime> crimeRecordedInCurrentMonth();
+	
 	
 }
