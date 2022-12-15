@@ -27,6 +27,9 @@ public class CriminalsUsecase {
 		Scanner scan = new Scanner(System.in);
 		System.out.println("Enter Criminal's details - ");
 
+		System.out.println("Enter Criminal's associated crime id");
+		int AssCrimeId  = scan.nextInt();
+		
 		System.out.println("Enter Criminal name");
 		String name = scan.next();
 		
@@ -48,12 +51,20 @@ public class CriminalsUsecase {
 		System.out.println("Enter Criminal's attatched crime");
 		String AttatchedCrime = scan.next();
 		
+		criminal.setAssCrimeId(AssCrimeId);
+		
 		criminal.setName(name);
+		
 		criminal.setAge(age);
+		
 		criminal.setGender(gender);
+		
 		criminal.setAddress(address);
+		
 		criminal.setIdentifyingMark(identifyingMark);
+		
 		criminal.setAreaOfArrest(AreaofArrest);
+		
 		criminal.setAttatchedCrime(AttatchedCrime);
 		
 		
@@ -92,12 +103,20 @@ public class CriminalsUsecase {
 		
 		if(criminal != null) {
 			
+			System.out.println("Criminal's Associated crimeid is : - " + criminal.getAssCrimeId());
+			
 			System.out.println("Criminal's Name is : - " + criminal.getName());
+			
 			System.out.println("Criminal's age is : - " + criminal.getAge());
+			
 			System.out.println("Criminal's gender is : - " + criminal.getGender());
+			
 			System.out.println("Criminal's address is : - " + criminal.getAddress());
+			
 			System.out.println("Criminal's identifying mark is : - " + criminal.getIdentifyingMark());
+			
 			System.out.println("Criminal's area of arrest is : - " + criminal.getAreaOfArrest());
+			
 			System.out.println("Criminal's attatched crime  is : - " + criminal.getAttatchedCrime());
 			
 		}
@@ -121,12 +140,20 @@ public class CriminalsUsecase {
 
 			criminals.forEach(c -> {
 
+				System.out.println("Criminal's Associated crimeid is : - " + c.getAssCrimeId());
+				
 				System.out.println("Criminal Name : " + c.getName());
+				
 				System.out.println("criminal age  : " + c.getAge());
+				
 				System.out.println("Criminal gender  : " + c.getGender());
+				
 				System.out.println("Criminal address  : " + c.getAddress());
+				
 				System.out.println("Criminal identifyingMark   : " + c.getIdentifyingMark());
+				
 				System.out.println("Criminal areaOfArrest  : " + c.getAreaOfArrest());
+				
 				System.out.println("Criminal attatchedCrime  : " + c.getAttatchedCrime());
 
 				System.out.println("==================================");
@@ -191,13 +218,14 @@ public class CriminalsUsecase {
 		
 		criminals.forEach(c -> {
 
-			System.out.println("Criminal Name : " + c.getName());
-			System.out.println("crimanal age   : " + c.getAge());
-			System.out.println("Criminal  gender  : " + c.getGender());
-			System.out.println("Criminal address : " + c.getAddress());
-			System.out.println("Criminal Identyfying mark : " + c.getIdentifyingMark());
-			System.out.println("Criminal area of arrest  : " + c.getAreaOfArrest());
-			System.out.println("Criminal attatched crime  : " + c.getAttatchedCrime());
+			System.out.println("Criminal's Associated crimeid is : - " + c.getAssCrimeId());
+			System.out.println("Criminal's Name : " + c.getName());
+			System.out.println("crimanal's age   : " + c.getAge());
+			System.out.println("Criminal's  gender  : " + c.getGender());
+			System.out.println("Criminal's address : " + c.getAddress());
+			System.out.println("Criminal's Identyfying mark : " + c.getIdentifyingMark());
+			System.out.println("Criminal's area of arrest  : " + c.getAreaOfArrest());
+			System.out.println("Criminal's attatched crime  : " + c.getAttatchedCrime());
 			
 			
 

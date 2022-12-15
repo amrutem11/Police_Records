@@ -22,21 +22,23 @@ public  class CriminalsDaoImpl implements CriminalsDao{
 		
 		try(Connection conn = DBUtil.provideConnection()){
 			
-			PreparedStatement  ps = conn.prepareStatement("insert into criminals values (?,?,?,?,?,?,?)");
+			PreparedStatement  ps = conn.prepareStatement("insert into criminals values (?,?,?,?,?,?,?,?)");
 			
-			ps.setString(1, criminal.getName());
+			ps.setInt(1, criminal.getAssCrimeId());
 			
-			ps.setInt(2, criminal.getAge());
+			ps.setString(2, criminal.getName());
 			
-			ps.setString(3, criminal.getGender());
+			ps.setInt(3, criminal.getAge());
 			
-			ps.setString(4, criminal.getAddress());
+			ps.setString(4, criminal.getGender());
 			
-			ps.setString(5, criminal.getIdentifyingMark());
+			ps.setString(5, criminal.getAddress());
 			
-			ps.setString(6, criminal.getAreaOfArrest());
+			ps.setString(6, criminal.getIdentifyingMark());
 			
-			ps.setString(7, criminal.getAttatchedCrime());
+			ps.setString(7, criminal.getAreaOfArrest());
+			
+			ps.setString(8, criminal.getAttatchedCrime());
 			
 			
 			int x = ps.executeUpdate();
@@ -68,6 +70,8 @@ public  class CriminalsDaoImpl implements CriminalsDao{
 			
 			while(rs.next()) {
 				
+				int c = rs.getInt("AssCrimeId");
+				
 				String n = rs.getString("name");
 				
 				int a = rs.getInt("age");
@@ -83,6 +87,8 @@ public  class CriminalsDaoImpl implements CriminalsDao{
 				String ac = rs.getString("AttatchedCrime");
 				
 				Criminal criminal = new Criminal();
+				
+				criminal.setAssCrimeId(c);
 				
 				criminal.setName(n);
 				
@@ -161,6 +167,8 @@ public  class CriminalsDaoImpl implements CriminalsDao{
 		
 		if(rs.next()) {
 			
+			int c = rs.getInt("AssCrimeId");
+			
 			String n = rs.getString("Name");
 			
 			int a = rs.getInt("Age");
@@ -176,6 +184,8 @@ public  class CriminalsDaoImpl implements CriminalsDao{
 			String ac = rs.getString("AttatchedCrime");
 			
 			 criminal = new Criminal();
+			 
+			 criminal.setAssCrimeId(c);
 			 
 			 criminal.setName(n);
 			 
@@ -221,6 +231,8 @@ public  class CriminalsDaoImpl implements CriminalsDao{
 			
 			while(rs.next()) {
 				
+				int c = rs.getInt("AssCrimeId");
+				
 				String n = rs.getString("Name");	
 				
 				int a = rs.getInt("Age");
@@ -238,6 +250,8 @@ public  class CriminalsDaoImpl implements CriminalsDao{
 				
 			
 				Criminal criminal = new Criminal();
+				
+				criminal.setAssCrimeId(c);
 				
 				criminal.setName(n);
 				

@@ -1,6 +1,7 @@
 package com.Model;
 
 public class Criminal {
+	private int AssCrimeId;
 	private String name;
 	private int age;
 	private String gender;
@@ -13,16 +14,34 @@ public class Criminal {
 		super();
 	}
 	
-	public Criminal(String name, int age, String gender, String address, String identifyingMark, String areaOfArrest,
+	public Criminal(int AssCrimeId,String name, int age, String gender, String address, String identifyingMark, String areaOfArrest,
 			String attatchedCrime) {
+		
 		super();
+		
+		this.AssCrimeId = AssCrimeId;
+		
 		this.name = name;
+		
 		this.age = age;
+		
 		this.gender = gender;
+		
 		this.address = address;
+		
 		this.identifyingMark = identifyingMark;
+		
 		this.areaOfArrest = areaOfArrest;
+		
 		AttatchedCrime = attatchedCrime;
+	}
+
+	public int getAssCrimeId() {
+		return AssCrimeId;
+	}
+
+	public void setAssCrimeId(int assCrimeId) {
+		AssCrimeId = assCrimeId;
 	}
 
 	public String getName() {
@@ -83,10 +102,15 @@ public class Criminal {
 
 	@Override
 	public String toString() {
-		return "Criminal [name=" + name + ", age=" + age + ", gender=" + gender + ", address=" + address
-				+ ", identifyingMark=" + identifyingMark + ", areaOfArrest=" + areaOfArrest + ", AttatchedCrime="
-				+ AttatchedCrime + "]";
+		
+		return "Criminal [AssCrimeId=" + AssCrimeId + ", name=" + name + ", age=" + age + ", gender=" + gender
+				
+				+ ", address=" + address + ", identifyingMark=" + identifyingMark + ", areaOfArrest=" + areaOfArrest
+				
+				+ ", AttatchedCrime=" + AttatchedCrime + "]";
 	}
+
+	
 	
 	
 	
