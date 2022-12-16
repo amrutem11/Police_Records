@@ -205,6 +205,7 @@ public  class CriminalsDaoImpl implements CriminalsDao{
 
 		
 		} catch (SQLException e) {
+			
 			System.out.println(e.getMessage());
 		}
 		

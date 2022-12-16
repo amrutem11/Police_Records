@@ -96,9 +96,11 @@ public class UserActivity {
 		
 		default :
 			System.out.println("Invalid choice!");
+			
 			System.out.println();
 
 			System.out.println("Try again...");
+			
 			UserActivity.adminOptions();
 	}
 }
@@ -115,8 +117,10 @@ public class UserActivity {
 		System.out.println("----------------------------------");
 
 		System.out.println("\nChoose an options - \r\n" + "1. Add New Criminal\r\n"+"2. Search Criminal by Name\r\n"
-							+ "3. View All Criminals\r\n" + "4. View All Criminals AreaWise\r\n" + "5. Delete Criminal by Name\r\n" 
-								+ "6. Exit (Get Admin Options)");
+		
+							+ "3. View All Criminals\r\n" + "4. View All Criminals AreaWise\r\n" +
+							
+							"5. Delete Criminal by Name\r\n" + "6. Exit (Get Admin Options)");
 
 		Scanner scan = new Scanner(System.in);
 
@@ -126,11 +130,13 @@ public class UserActivity {
 		
 		try {
 			choice = scan.nextInt();
+			
 		} catch (InputMismatchException e) {
 
 			System.out.println("Invalid input!");
 
 			System.out.println();
+			
 			System.out.println("Try again...");
 
 			UserActivity.criminalsOptions();

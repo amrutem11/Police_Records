@@ -219,12 +219,19 @@ public class CriminalsUsecase {
 		criminals.forEach(c -> {
 
 			System.out.println("Criminal's Associated crimeid is : - " + c.getAssCrimeId());
+			
 			System.out.println("Criminal's Name : " + c.getName());
+			
 			System.out.println("crimanal's age   : " + c.getAge());
+			
 			System.out.println("Criminal's  gender  : " + c.getGender());
+			
 			System.out.println("Criminal's address : " + c.getAddress());
+			
 			System.out.println("Criminal's Identyfying mark : " + c.getIdentifyingMark());
+			
 			System.out.println("Criminal's area of arrest  : " + c.getAreaOfArrest());
+			
 			System.out.println("Criminal's attatched crime  : " + c.getAttatchedCrime());
 			
 			
