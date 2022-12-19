@@ -1,0 +1,39 @@
+
+
+create database SB101CW;
+
+
+use SB101CW;
+
+create table admin
+(
+username varchar(255) NOT NULL UNIQUE,
+password varchar(255) NOT NULL
+);
+
+
+
+create table criminals
+(
+AssCrimeId int,
+Name varchar(20) NOT NULL,
+Age int,
+Gender varchar(12),
+Address varchar(12),
+IdentifyingMark varchar(20),
+AreaOfArrest varchar(30),
+AttatchedCrime varchar(20),
+FOREIGN KEY(AssCrimeId) references crime(CrimeId) ON DELETE CASCADE
+);
+
+create table Crime
+(
+CrimeId int PRIMARY KEY,
+Date Date,
+Place varchar(15) NOT NULL,
+Description varchar(100) NOT NULL,
+Victims varchar(60),
+DetailDescription varchar(200),
+Suspects varchar(50),
+Status varchar(15)
+);
